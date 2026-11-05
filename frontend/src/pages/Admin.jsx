@@ -419,27 +419,6 @@ const Admin = () => {
           </form>
 
           <div className="mt-6 pt-5 border-t border-neutral-200 text-center">
-            <span className="text-[11px] text-[#7A7A7A] block mb-2 font-medium">
-              Quick Autofill Credentials:
-            </span>
-            <div className="flex flex-col gap-1.5 mb-3 text-left">
-              <button
-                type="button"
-                onClick={() => { setAdminEmail('admin@thejournal.com'); setAdminPassword('admin123'); }}
-                className="text-[11px] p-2 bg-neutral-100 hover:bg-neutral-200 rounded text-neutral-800 flex items-center justify-between transition"
-              >
-                <span><strong>Seed Admin:</strong> admin@thejournal.com</span>
-                <span className="text-[10px] text-neutral-500 font-mono">admin123 &rarr;</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => { setAdminEmail('bmwm99892@gmail.com'); setAdminPassword('admin123'); }}
-                className="text-[11px] p-2 bg-neutral-100 hover:bg-neutral-200 rounded text-neutral-800 flex items-center justify-between transition"
-              >
-                <span><strong>Personal Admin:</strong> bmwm99892@gmail.com</span>
-                <span className="text-[10px] text-neutral-500 font-mono">admin123 &rarr;</span>
-              </button>
-            </div>
             <Link to="/" className="text-xs text-neutral-900 font-semibold hover:underline">
               &larr; Return to Public Editorial Website
             </Link>
