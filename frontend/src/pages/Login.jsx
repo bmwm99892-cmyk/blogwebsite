@@ -16,9 +16,16 @@ const Login = () => {
     setError('');
     setLoading(true);
     try {
-      const res = await axios.post('/api/auth/login', formData);
+      const res = await axios.post('/api/auth/login', {
+        email: formData.email.trim(),
+        password: formData.password.trim()
+      });
       login(res.data.user, res.data.token);
-      navigate('/');
+      if (res.data.user?.role === 'admin') {
+        navigate('/admin');
+      } else {
+        navigate('/');
+      }
     } catch (err) {
       setError(err.response?.data?.error || 'Invalid credentials. Please verify your email and password.');
     } finally {
@@ -85,7 +92,32 @@ const Login = () => {
           </button>
         </form>
 
-        <div className="mt-8 pt-6 border-t border-[#E8E8E6] text-center text-xs text-[#666666]">
+        {/* Quick Admin Fill Options */}
+        <div className="mt-6 pt-5 border-t border-[#E8E8E6]">
+          <span className="text-[10px] uppercase tracking-wider text-[#8E8E8E] block mb-2 font-medium">
+            Quick Admin Autofill:
+          </span>
+          <div className="flex flex-col gap-1.5">
+            <button
+              type="button"
+              onClick={() => setFormData({ email: 'admin@thejournal.com', password: 'admin123' })}
+              className="text-[11px] p-2 bg-[#F5F5F3] hover:bg-[#EBEBE8] rounded text-[#121212] flex items-center justify-between transition text-left"
+            >
+              <span><strong>Seed Admin:</strong> admin@thejournal.com</span>
+              <span className="text-[10px] text-neutral-500 font-mono">admin123 &rarr;</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setFormData({ email: 'bmwm99892@gmail.com', password: 'admin123' })}
+              className="text-[11px] p-2 bg-[#F5F5F3] hover:bg-[#EBEBE8] rounded text-[#121212] flex items-center justify-between transition text-left"
+            >
+              <span><strong>Personal Admin:</strong> bmwm99892@gmail.com</span>
+              <span className="text-[10px] text-neutral-500 font-mono">admin123 &rarr;</span>
+            </button>
+          </div>
+        </div>
+
+        <div className="mt-6 pt-4 border-t border-[#E8E8E6] text-center text-xs text-[#666666]">
           <span>Don't have a contributor account? </span>
           <Link to="/register" className="text-[#121212] font-semibold hover:underline">
             Register here
